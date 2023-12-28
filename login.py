@@ -1,4 +1,4 @@
-#import tkinter ??
+#import tkinter
 import customtkinter as ctk
 
 
@@ -16,15 +16,15 @@ def NextPage():
 #***
 page = ctk.CTk()
 page.geometry("720x360")
-page.title("Main Page")
+page.title("Login/Register Page")
 
-label = ctk.CTkLabel(page, text="Hi, Main Page")
+label = ctk.CTkLabel(page, text="Hi, Login Page")
 label.pack()
 
-buttonPrev = ctk.CTkButton(page, text="Previous Page", command=PrevPage)
+buttonPrev = ctk.CTkButton(page, text="Previous Page", command=PrevPage, state="disabled")
 buttonPrev.pack(side="left", padx=10, pady=10)
 
-buttonNext = ctk.CTkButton(page, text="Next Page", command=NextPage, state="disabled")
+buttonNext = ctk.CTkButton(page, text="Next Page", command=NextPage)
 buttonNext.pack(side="right", padx=10, pady=10)
 
 
