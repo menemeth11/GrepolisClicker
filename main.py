@@ -21,6 +21,9 @@ page.title("Main Page")
 label = ctk.CTkLabel(page, text="Hi, Main Page")
 label.pack()
 
+label1 = ctk.CTkLabel(page, text="HELLO WORLD 2!", font=("Segoe UI", 40, "bold"), text_color="red")
+label1.pack()
+
 buttonPrev = ctk.CTkButton(page, text="Previous Page", command=PrevPage)
 buttonPrev.pack(side="left", padx=10, pady=10)
 

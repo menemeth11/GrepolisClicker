@@ -21,6 +21,11 @@ page.title("Login/Register Page")
 label = ctk.CTkLabel(page, text="Hi, Login Page")
 label.pack()
 
+
+label1 = ctk.CTkLabel(page, text="HELLO WORLD!", font=("Segoe UI", 50, "bold"), text_color="red")
+label1.pack()
+
+
 buttonPrev = ctk.CTkButton(page, text="Previous Page", command=PrevPage, state="disabled")
 buttonPrev.pack(side="left", padx=10, pady=10)
 
