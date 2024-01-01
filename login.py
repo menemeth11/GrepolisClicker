@@ -1,4 +1,4 @@
-#import tkinter
+import tkinter as tk
 import customtkinter as ctk
 
 
@@ -13,7 +13,8 @@ def NextPage():
     page.destroy()
     import main
 
-#***
+#***    
+#idk = tk.Tk()
 page = ctk.CTk()
 page.geometry("720x360")
 page.title("Login/Register Page")
@@ -24,6 +25,17 @@ label.pack()
 
 label1 = ctk.CTkLabel(page, text="HELLO WORLD!", font=("Segoe UI", 50, "bold"), text_color="red")
 label1.pack()
+
+#next
+loginFrame = tk.LabelFrame(page, text="Login", bd=5)
+loginFrame.pack(page, row=0, column=0, padx=20, pady=20)
+
+label2 = ctk.CTkEntry(loginFrame, placeholder_text="PUT IT HERE")
+#label3 = ctk.CTkEntry(page, placeholder_text="PUT IT HERE").pack()
+
+
+
+#passwordsFrame = ctk.CTkFrame(page, text="Password", background=5)
 
 
 buttonPrev = ctk.CTkButton(page, text="Previous Page", command=PrevPage, state="disabled")
