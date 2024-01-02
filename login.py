@@ -26,20 +26,29 @@ label.pack()
 label1 = ctk.CTkLabel(page, text="HELLO WORLD!", font=("Segoe UI", 50, "bold"), text_color="red")
 label1.pack()
 
+frameMenu = ctk.CTkFrame(page, height=200, width=600)
+frameMenu.pack()
 #next
-loginFrame = tk.LabelFrame(page, text="Login", bd=5)
-loginFrame.pack(page, row=0, column=0, padx=20, pady=20)
+loginFrame = tk.LabelFrame(frameMenu, text="Login", bd=5, relief="ridge")
+loginFrame.grid(row=0, column=0, sticky="W", padx=20, pady=20)
 
-label2 = ctk.CTkEntry(loginFrame, placeholder_text="PUT IT HERE")
-#label3 = ctk.CTkEntry(page, placeholder_text="PUT IT HERE").pack()
+label2 = ctk.CTkEntry(loginFrame, placeholder_text="PUT LOGIN HERE").pack(pady=10)
 
+passwordsFrame = tk.LabelFrame(frameMenu, text="Password", bd=5, relief="ridge")
+passwordsFrame.grid(row=1, column=0, sticky="W", padx=20, pady=20)
 
-
-#passwordsFrame = ctk.CTkFrame(page, text="Password", background=5)
+label3 = ctk.CTkEntry(passwordsFrame, placeholder_text="PUT PASSWORD HERE").pack(pady=10)
 
 
 buttonPrev = ctk.CTkButton(page, text="Previous Page", command=PrevPage, state="disabled")
 buttonPrev.pack(side="left", padx=10, pady=10)
+'''
+def Quit():
+    answer = messageBox.askyesno(title="Quit Confirm", message="Are you sure you want to quit"
+    if answer:
+        page.destroy()
+'''
+buttonQuit = ctk.CTkButton(page, text="QUIT", state="disabled").pack(side="left")
 
 buttonNext = ctk.CTkButton(page, text="Next Page", command=NextPage)
 buttonNext.pack(side="right", padx=10, pady=10)
