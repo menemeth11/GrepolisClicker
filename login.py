@@ -1,4 +1,3 @@
-import time
 import tkinter as tk
 import customtkinter as ctk
 
@@ -14,6 +13,11 @@ def NextPage():
     page.destroy()
     import main
 
+def login():
+    login = textLogin.get()
+    passw = textPassword.get()
+    print(f'Login: {login}, Password: {passw}')
+
 #***    
 #idk = tk.Tk()
 page = ctk.CTk()
@@ -25,23 +29,22 @@ label = ctk.CTkLabel(page, text="HELLO WORLD!", font=("Segoe UI", 50, "bold"), t
 
 menuFrame = ctk.CTkFrame(page, width=450, height=80, border_width=3, border_color="green").grid(column=0, row=1,columnspan= 2,rowspan=2, padx=10, pady=10)
 
-textLogin = ""
+textLogin = ctk.StringVar()
 labelLogin = ctk.CTkLabel(menuFrame, text="LOGIN:", text_color="green", font=("Segoe UI", 15, "bold"), bg_color="#2b2b2b").grid(column=0, row=1,sticky="s")
 inputLogin = ctk.CTkEntry(menuFrame, placeholder_text="Put Your login here", width=180, textvariable=textLogin).grid(column=0, row=2, sticky="n")
 
-textPassword = ""
+textPassword = ctk.StringVar()
 labelPassword = ctk.CTkLabel(menuFrame, text="PASSWORD:", text_color="green", font=("Segoe UI", 15, "bold"), bg_color="#2b2b2b").grid(column=1, row=1,sticky="s")
 inputPassword = ctk.CTkEntry(menuFrame, placeholder_text="Put Your password here", width=180, show="*", textvariable=textPassword).grid(column=1, row=2, sticky="n")
 
 
 
 
-def login():
-    print(f"Login: {textLogin}, Password: {textPassword}")
-    x = inputPassword.__str__
-    print(x)
 
-buttonLogin = ctk.CTkButton(page, text="Login!", command="login").grid(column=0, columnspan=2)
+    
+    #print(f"Login: {inputLogin.get()}, Password: {inputPassword.get()}")
+
+buttonLogin = ctk.CTkButton(page, text="Login!", command=login).grid(column=0, columnspan=2)
 
 
 
