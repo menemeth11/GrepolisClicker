@@ -10,4 +10,6 @@ test.mainloop()'''
 import pyautogui as gui
 import time
 
+
+
 gui.displayMousePosition()

@@ -1,51 +1,47 @@
-import tkinter as tk
+from tkinter import messagebox
 import customtkinter as ctk
-
 
 ctk.set_appearance_mode("System")
 ctk.set_default_color_theme("green")  # Themes: "blue" (standard), "green", "dark-blue"
 #***
-def PrevPage():
-    page.destroy()
-    import login
-
-def NextPage():
-    page.destroy()
-    import main
-
+test1, test2 = "12", "1234" #temp for4 before DB 
 def login():
     login = textLogin.get()
     passw = textPassword.get()
-    print(f'Login: {login}, Password: {passw}')
+    #print(f'Login: {login}, Password: {passw}')
+    if(login == test1 and passw == test2):
+        page.destroy()
+        import main
+    elif login != test1 and passw != "":
+        messagebox.showerror("Error","User does not exist!")
+    elif login != "" and passw != test2:
+        messagebox.showerror("Error","Wrong password!")
+    else : #login == "" or passw == "":
+        messagebox.showerror("Error","Complete all data!")
+    
 
 #***    
-#idk = tk.Tk()
 page = ctk.CTk()
-page.geometry("470x360")
-page.title("Login/Register Page")
+page.geometry("470x260")
+page.title("Clicker by Menemeth11")
 page.resizable(False, False)
 
-label = ctk.CTkLabel(page, text="HELLO WORLD!", font=("Segoe UI", 50, "bold"), text_color="red", bg_color="yellow").grid(column=0, row=0,columnspan= 2, sticky="we")
+label = ctk.CTkLabel(page, text="Grepo Clicker", font=("Segoe UI", 50, "bold"), text_color="Green").grid(column=0, row=0,columnspan= 2, sticky="we")
+label1 = ctk.CTkLabel(page, text="by Menemeth11", font=("Segoe UI", 10, "bold"), text_color="Green").grid(column=0, row=1,columnspan= 2, sticky="n")
 
-menuFrame = ctk.CTkFrame(page, width=450, height=80, border_width=3, border_color="green").grid(column=0, row=1,columnspan= 2,rowspan=2, padx=10, pady=10)
+menuFrame = ctk.CTkFrame(page, width=450, height=80, border_width=3, border_color="green").grid(column=0, row=2,columnspan= 2,rowspan=2, padx=10, pady=10)
 
 textLogin = ctk.StringVar()
-labelLogin = ctk.CTkLabel(menuFrame, text="LOGIN:", text_color="green", font=("Segoe UI", 15, "bold"), bg_color="#2b2b2b").grid(column=0, row=1,sticky="s")
-inputLogin = ctk.CTkEntry(menuFrame, placeholder_text="Put Your login here", width=180, textvariable=textLogin).grid(column=0, row=2, sticky="n")
+labelLogin = ctk.CTkLabel(menuFrame, text="LOGIN:", text_color="green", font=("Segoe UI", 15, "bold"), bg_color="#2b2b2b").grid(column=0, row=2,sticky="s")
+inputLogin = ctk.CTkEntry(menuFrame, placeholder_text="Put Your login here", width=180, textvariable=textLogin).grid(column=0, row=3, sticky="n")
 
 textPassword = ctk.StringVar()
-labelPassword = ctk.CTkLabel(menuFrame, text="PASSWORD:", text_color="green", font=("Segoe UI", 15, "bold"), bg_color="#2b2b2b").grid(column=1, row=1,sticky="s")
-inputPassword = ctk.CTkEntry(menuFrame, placeholder_text="Put Your password here", width=180, show="*", textvariable=textPassword).grid(column=1, row=2, sticky="n")
+labelPassword = ctk.CTkLabel(menuFrame, text="PASSWORD:", text_color="green", font=("Segoe UI", 15, "bold"), bg_color="#2b2b2b").grid(column=1, row=2,sticky="s")
+inputPassword = ctk.CTkEntry(menuFrame, placeholder_text="Put Your password here", width=180, show="*", textvariable=textPassword).grid(column=1, row=3, sticky="n")
 
+buttonLogin = ctk.CTkButton(page, text="Login!", command=login, width=300, height=50).grid(column=0, columnspan=2)
 
-
-
-
-    
-    #print(f"Login: {inputLogin.get()}, Password: {inputPassword.get()}")
-
-buttonLogin = ctk.CTkButton(page, text="Login!", command=login).grid(column=0, columnspan=2)
-
+page.mainloop()
 
 
 
@@ -79,4 +75,3 @@ def Quit():
 #buttonNext.pack(side="right", padx=10, pady=10)
 
 
-page.mainloop()
