@@ -24,6 +24,21 @@ def test():
 
 def pickLocation():
     test()
+
+
+def start():
+    x = entryX.get()
+    y = entryY.get()
+    print(f"Clicking {x}|{y}")
+index = 0
+def addTotree():   
+    tree.insert("", "end", iid=None, value=(entryX.get(), entryY.get(), comboMouseB.get(), entryTimeMS.get())) # valuse x,y, r/l, delay
+    entryX.delete(0, "end")
+    entryY.delete(0, "end")
+    comboMouseB.set("Left")
+    entryTimeMS.delete(0, "end")
+
+    index += 1
 # Desing
 leftFrame = ctk.CTkFrame(page, width=400)
 leftFrame.grid()
@@ -36,15 +51,15 @@ buttonPick.grid(row=0, padx=5, pady=5, columnspan=2, sticky="we")
 # row 1
 labelX = ctk.CTkLabel(leftFrame, text="X")
 labelX.grid(column=0, row=1, sticky="w", padx=15, pady=5)
-entryX = ctk.CTkEntry(leftFrame, width=50)
+entryX = ctk.CTkEntry(leftFrame, width=50) ##?
 entryX.grid(column=0, row=1, padx=1, pady=5)
 
 labelY = ctk.CTkLabel(leftFrame, text="Y")
 labelY.grid(column=1, row=1, sticky="w", padx=15, pady=5)
-entryY = ctk.CTkEntry(leftFrame, width=50)
+entryY = ctk.CTkEntry(leftFrame, width=50) ## ?
 entryY.grid(column=1, row=1, padx=1, pady=5)
 # row 2
-labelMouseB = ctk.CTkButton(leftFrame, text="Mouse button: ")
+labelMouseB = ctk.CTkLabel(leftFrame, text="Mouse button: ")
 labelMouseB.grid(column=0, row=2, padx=5, pady=5)
 comboMouseB =  ctk.CTkComboBox(leftFrame, values=["Left", "Right"], state="readonly") #combobox.bind('<<ComboboxSelected>>', callback)
 comboMouseB.set("Left")
@@ -52,21 +67,24 @@ comboMouseB.grid(column=1, row=2, padx=5, pady=5)
 # row 3
 labelTimeMS = ctk.CTkLabel(leftFrame, text="Time to sleep (MS): ")
 labelTimeMS.grid(column=0, row=3, padx=5, pady=5)
-entryTimeMS = ctk.CTkEntry(leftFrame)
+
+timeMS = ctk.StringVar() # don't need this, just use .get()
+entryTimeMS = ctk.CTkEntry(leftFrame, textvariable=timeMS)
 entryTimeMS.grid(column=1, row=3, sticky="e", padx=20, pady=5)
 # row 4
-buttonAdd = ctk.CTkButton(leftFrame, text="Add position")
+buttonAdd = ctk.CTkButton(leftFrame, text="Add position", command=addTotree)
 buttonAdd.grid(columnspan=2, row= 4, padx=5, pady=5, sticky="we")
 # row 5
 checkRepeat = ctk.CTkCheckBox(leftFrame, text="Repeat")
 checkRepeat.grid(column=0, row=5, padx=5, pady=5)
-entryTimeRepeat = ctk.CTkEntry(leftFrame)
+timerepeat = ctk.StringVar()
+entryTimeRepeat = ctk.CTkEntry(leftFrame, textvariable=timerepeat)
 entryTimeRepeat.grid(column=1, row=5, sticky="e", padx=20, pady=5)
 # row 6
 checkUntil = ctk.CTkCheckBox(leftFrame, text="Reapeat until stopped")
 checkUntil.grid( columnspan=2, row=6, padx=5, pady=5)
 # row 7
-buttonStart = ctk.CTkButton(leftFrame, text="Start Clicking (F9)")
+buttonStart = ctk.CTkButton(leftFrame, text="Start Clicking (F9)", command=start)
 buttonStart.grid(columnspan=2, row= 7, padx=5, pady=5, sticky="we")
 # row 8
 buttonStop = ctk.CTkButton(leftFrame, text="Stop Clicking (F9)")
