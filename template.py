@@ -2,8 +2,8 @@ from tkinter import ttk
 import customtkinter as ctk
 import pyautogui as gui
 import time as t
-import win32api
-import win32con
+#import win32api
+#import win32con
 
 # Settings
 ctk.set_appearance_mode("System")
@@ -30,15 +30,28 @@ def start():
     x = entryX.get()
     y = entryY.get()
     print(f"Clicking {x}|{y}")
+
+global index
 index = 0
 def addTotree():   
     tree.insert("", "end", iid=None, value=(entryX.get(), entryY.get(), comboMouseB.get(), entryTimeMS.get())) # valuse x,y, r/l, delay
-    entryX.delete(0, "end")
-    entryY.delete(0, "end")
+    #entryX.delete(0, "end")
+    #entryY.delete(0, "end")
     comboMouseB.set("Left")
-    entryTimeMS.delete(0, "end")
-
+    #entryTimeMS.delete(0, "end")
     index += 1
+
+def delete():
+    if len(tree.selection()) != 0:
+        x = tree.selection()
+        for record in x:
+            tree.delete(x)
+    else:
+        for record in tree.get_children():
+            tree.delete(record)
+
+
+
 # Desing
 leftFrame = ctk.CTkFrame(page, width=400)
 leftFrame.grid()
@@ -91,7 +104,9 @@ buttonStop = ctk.CTkButton(leftFrame, text="Stop Clicking (F9)")
 buttonStop.grid(columnspan=2, row= 8, padx=5, pady=5, sticky="we")
 # row 9
 buttonOptions = ctk.CTkButton(leftFrame, text="Options")
-buttonOptions.grid(columnspan=2, row= 9, padx=5, pady=5, sticky="we")
+buttonOptions.grid(column= 0, row= 9, padx=5, pady=5, sticky="we")
+buttonDelete = ctk.CTkButton(leftFrame, text="Delete Cord", command=delete)
+buttonDelete.grid(column = 1, row= 9, padx=5, pady=5, sticky="we")
 
 #label5 = ctk.CTkLabel(leftFrame, text="Queued Cursor Positions")
 #label5.grid(column=3, row=0, padx=5, pady=5)
