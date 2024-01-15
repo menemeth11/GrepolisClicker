@@ -45,7 +45,7 @@ def delete():
     if len(tree.selection()) != 0:
         x = tree.selection()
         for record in x:
-            tree.delete(x)
+            tree.delete(record)
     else:
         for record in tree.get_children():
             tree.delete(record)
