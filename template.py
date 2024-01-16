@@ -3,6 +3,7 @@ import customtkinter as ctk
 import pyautogui as gui
 import time as t
 from tkinter import messagebox
+import time
 #import win32api
 #import win32con
 
@@ -28,6 +29,28 @@ def pickLocation():
 
 
 def start():
+    if checkRepeat.get() == 0 and checkUntil.get() == 0:
+            messagebox.showerror("Error","Chose repeat type!")
+            return
+
+    z = checkRepeat.get() #0 - empty | 1 - mark
+    
+    if z == 1:
+        try:
+            repeat = int(entryTimeRepeat.get())
+            for i in range(0, repeat):
+                labelYet.configure(text = f"Clicks: {repeat}")
+                time.sleep(0.5)
+
+        except:
+            messagebox.showerror("Error","Set repeat time. Only numbers!")
+    else:
+        pass
+
+
+
+
+
     x = entryX.get()
     y = entryY.get()
     print(f"Clicking {x}|{y}")
@@ -88,21 +111,23 @@ comboMouseB.grid(column=1, row=2, padx=5, pady=5)
 labelTimeMS = ctk.CTkLabel(leftFrame, text="Time to sleep (MS): ")
 labelTimeMS.grid(column=0, row=3, padx=5, pady=5)
 
-timeMS = ctk.StringVar() # don't need this, just use .get()
-entryTimeMS = ctk.CTkEntry(leftFrame, textvariable=timeMS)
+entryTimeMS = ctk.CTkEntry(leftFrame)
 entryTimeMS.grid(column=1, row=3, sticky="e", padx=20, pady=5)
 # row 4
 buttonAdd = ctk.CTkButton(leftFrame, text="Add position", command=addTotree)
 buttonAdd.grid(columnspan=2, row= 4, padx=5, pady=5, sticky="we")
 # row 5
 checkRepeat = ctk.CTkCheckBox(leftFrame, text="Repeat")
-checkRepeat.grid(column=0, row=5, padx=5, pady=5)
-timerepeat = ctk.StringVar()
-entryTimeRepeat = ctk.CTkEntry(leftFrame, textvariable=timerepeat)
+checkRepeat.grid(column=0, row=5, padx=5, pady=5, sticky="w")
+
+entryTimeRepeat = ctk.CTkEntry(leftFrame)
 entryTimeRepeat.grid(column=1, row=5, sticky="e", padx=20, pady=5)
 # row 6
 checkUntil = ctk.CTkCheckBox(leftFrame, text="Reapeat until stopped")
-checkUntil.grid( columnspan=2, row=6, padx=5, pady=5)
+checkUntil.grid( column=0, row=6, padx=5, pady=5)
+
+labelYet = ctk.CTkLabel(leftFrame, text="0")
+labelYet.grid(column=1, row=6, padx=5, pady=5)
 # row 7
 buttonStart = ctk.CTkButton(leftFrame, text="Start Clicking (F9)", command=start)
 buttonStart.grid(columnspan=2, row= 7, padx=5, pady=5, sticky="we")
@@ -118,20 +143,27 @@ buttonDelete.grid(column = 1, row= 9, padx=5, pady=5, sticky="we")
 #label5 = ctk.CTkLabel(leftFrame, text="Queued Cursor Positions")
 #label5.grid(column=3, row=0, padx=5, pady=5)
 
+def set_column_width(tree, col, width):
+    tree.column(col, minwidth=width, width=width, anchor="center")
+
 cols = ("x", "y", "l/r", "delay")
 tree = ttk.Treeview(page, columns=cols, show='headings', height=17) #IMPORTANT
-tree.column("x", width=100, stretch=False)
+#tree.column("x", width=100, stretch=False)
 tree.heading("x", text="X")
 
-tree.column("y", width=100, stretch= False)
+#tree.column("y", width=100, stretch= False)
 tree.heading("y", text="Y")
 
-tree.column("l/r", width=100)
+#tree.column("l/r", width=100)
 tree.heading("l/r", text="L/R")
 
-tree.column("delay", width=100)
+#tree.column("delay", width=100)
 tree.heading("delay", text="Delay (MS)")
 
+set_column_width(tree, "x", 100)
+set_column_width(tree, "y", 100)
+set_column_width(tree, "l/r", 100)
+set_column_width(tree, "delay", 100)
 
 tree.grid(column=3, row=0, rowspan=9, sticky="nw", padx=5, pady=7)
 
