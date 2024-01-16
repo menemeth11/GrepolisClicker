@@ -2,6 +2,7 @@ from tkinter import ttk
 import customtkinter as ctk
 import pyautogui as gui
 import time as t
+from tkinter import messagebox
 #import win32api
 #import win32con
 
@@ -9,7 +10,7 @@ import time as t
 ctk.set_appearance_mode("System")
 ctk.set_default_color_theme("green")
 page = ctk.CTk()
-page.geometry("750x375")
+page.geometry("740x375")
 page.title("Main Page")
 page.resizable(False, False)
 
@@ -31,15 +32,21 @@ def start():
     y = entryY.get()
     print(f"Clicking {x}|{y}")
 
-global index
-index = 0
-def addTotree():   
-    tree.insert("", "end", iid=None, value=(entryX.get(), entryY.get(), comboMouseB.get(), entryTimeMS.get())) # valuse x,y, r/l, delay
-    #entryX.delete(0, "end")
-    #entryY.delete(0, "end")
-    comboMouseB.set("Left")
-    #entryTimeMS.delete(0, "end")
-    index += 1
+
+def addTotree():
+    try:       
+        tree.insert("", "end", iid=None, value=(int(entryX.get()), int(entryY.get()), comboMouseB.get(), int(entryTimeMS.get()))) # valuse x,y, r/l, delay
+        entryX.delete(0, "end")
+        entryY.delete(0, "end")
+        comboMouseB.set("Left")
+        entryTimeMS.delete(0, "end")
+    except:
+        messagebox.showerror("Error","Only Numbers!")
+        entryX.delete(0, "end")
+        entryY.delete(0, "end")
+        comboMouseB.set("Left")
+        entryTimeMS.delete(0, "end")
+
 
 def delete():
     if len(tree.selection()) != 0:
