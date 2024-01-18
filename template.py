@@ -11,7 +11,7 @@ import time
 ctk.set_appearance_mode("System")
 ctk.set_default_color_theme("green")
 page = ctk.CTk()
-page.geometry("740x375")
+page.geometry("750x380")
 page.title("Main Page")
 page.resizable(False, False)
 
@@ -27,21 +27,31 @@ def test():
 def pickLocation():
     test()
 
+def xd(time):
+    if time < 0:
+        return
+    labelYet.configure(text =str(time))
+    labelYet.after(1000,xd(time-1))
+    print("I'm here")
 
 def start():
+    #0 - empty | 1 - mark
     if checkRepeat.get() == 0 and checkUntil.get() == 0:
-            messagebox.showerror("Error","Chose repeat type!")
-            return
-
-    z = checkRepeat.get() #0 - empty | 1 - mark
+        messagebox.showerror("Error","Chose repeat type!")
+        return
+    elif checkRepeat.get() == 1 and checkUntil.get() == 1:
+        messagebox.showerror("Error","Chose only one click type!")
+        checkRepeat.deselect()
+        checkUntil.deselect()
+        return
     
-    if z == 1:
+    if checkRepeat.get() == 1:
         try:
             repeat = int(entryTimeRepeat.get())
-            for i in range(0, repeat):
-                labelYet.configure(text = f"Clicks: {repeat}")
-                time.sleep(0.5)
-
+            xd(repeat)
+            #for i in range(0, repeat):
+            #    labelYet.configure(text = f"Clicks: {i}")
+            #    labelYet.after(500)
         except:
             messagebox.showerror("Error","Set repeat time. Only numbers!")
     else:
@@ -49,13 +59,13 @@ def start():
 
 
 
+    print("Done")
 
+    #x = entryX.get()
+    #y = entryY.get()
+    #print(f"Clicking {x}|{y}")
 
-    x = entryX.get()
-    y = entryY.get()
-    print(f"Clicking {x}|{y}")
-
-
+## Tree commands
 def addTotree():
     try:       
         tree.insert("", "end", iid=None, value=(int(entryX.get()), int(entryY.get()), comboMouseB.get(), int(entryTimeMS.get()))) # valuse x,y, r/l, delay
