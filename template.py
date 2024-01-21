@@ -170,10 +170,10 @@ tree.heading("l/r", text="L/R")
 #tree.column("delay", width=100)
 tree.heading("delay", text="Delay (MS)")
 
-set_column_width(tree, "x", 100)
-set_column_width(tree, "y", 100)
-set_column_width(tree, "l/r", 100)
-set_column_width(tree, "delay", 100)
+set_column_width(tree, "x", 120)
+set_column_width(tree, "y", 120)
+set_column_width(tree, "l/r", 120)
+set_column_width(tree, "delay", 120)
 
 tree.grid(column=3, row=0, rowspan=9, sticky="nw", padx=5, pady=7)
 
