@@ -4,8 +4,8 @@ import pyautogui as gui
 import time as t
 from tkinter import messagebox
 import time
-#import win32api
-#import win32con
+import win32api
+import win32con
 
 # Settings
 ctk.set_appearance_mode("System")
@@ -18,14 +18,19 @@ page.resizable(False, False)
 # Idk yet what
 
 # Commands
-def test():
-    #state = win32api.GetKeyState(0x01)
-    if win32api.GetKeyState(0x01): 
-        cords = gui.position()
-        print(cords)
+def test(event):
+    if win32api.GetKeyState(0x01) < 0:
+        x, y = win32api.GetCursorPos()
+        print(f"Cords({x}, {y})")
 
 def pickLocation():
-    test()
+    page.bind("<Button-1>", test)
+
+    #buttonPick.after(1000)
+    #if win32api.GetKeyState(0x01): 
+    #    x, y = win32api.GetCursorPos()
+    #    print(f"Cords({x}, {y})")
+
 
 def xd(time):
     if time < 0:
@@ -170,10 +175,10 @@ tree.heading("l/r", text="L/R")
 #tree.column("delay", width=100)
 tree.heading("delay", text="Delay (MS)")
 
-set_column_width(tree, "x", 120)
-set_column_width(tree, "y", 120)
-set_column_width(tree, "l/r", 120)
-set_column_width(tree, "delay", 120)
+set_column_width(tree, "x", 100)
+set_column_width(tree, "y", 100)
+set_column_width(tree, "l/r", 100)
+set_column_width(tree, "delay", 100)
 
 tree.grid(column=3, row=0, rowspan=9, sticky="nw", padx=5, pady=7)
 
