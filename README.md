@@ -1,3 +1,3 @@
 Hi, 
 I'm currently working on it
-Use: tkinter, custom tkinter 
+Use: tkinter, custom tkinter.
